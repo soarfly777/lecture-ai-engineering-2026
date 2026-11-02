@@ -5,8 +5,10 @@
 """
 
 import json
+import random
 from functools import cache
 from pathlib import Path
+from datetime import datetime
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 MAX_RESULTS = 3
@@ -77,3 +79,49 @@ def get_lecture_summary(lecture: int) -> str:
         available = sorted(p.stem for p in (DATA_DIR / "lectures").glob("*.md"))
         return f"第{lecture}回の要点はまだありません。用意されている回: {', '.join(available)}"
     return path.read_text(encoding="utf-8")
+
+def make_quiz(lecture: int) -> str:
+    """指定した回の用語集から1問の確認問題と答えを返す。
+
+    ユーザーが「第2回の確認問題を出して」のように、特定回の講義内容を
+    復習するための短い用語問題を求めたときに使う。
+    lecture には確認したい講義回を1始まりの整数で指定する。
+    """
+    terms = [entry for entry in load_glossary() if entry["lecture"] == lecture]
+
+    if not terms:
+        return f"第{lecture}回の用語は用語集にありません。"
+
+    entry = random.choice(terms)
+
+    return json.dumps(
+        {
+            "question": f"「{entry['term']}」の意味は？",
+            "answer": entry["definition"],
+        },
+        ensure_ascii=False,
+    )
+
+def save_learning_log(content: str) -> str:
+    """学習内容を learning_log フォルダに記録として保存する。
+
+    ユーザーが学んだこと、試したこと、実行結果、気づきなどを後から
+    振り返れるよう保存したいときに使う。ファイルの作成は取り消しにくいため、
+    保存前に必ずユーザーの承認を得る。
+    content には保存する学習記録の本文を指定する。
+    """
+    log_dir = DATA_DIR.parent / "learning_log"
+    log_dir.mkdir(exist_ok=True)
+
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    path = log_dir / f"learning_{timestamp}.md"
+
+    path.write_text(
+        f"# 学習記録\n\n"
+        f"- 保存日時: {datetime.now().isoformat(timespec='seconds')}\n\n"
+        f"{content.strip()}\n",
+        encoding="utf-8",
+    )
+
+    return f"学習記録を保存しました: {path}"
+    
