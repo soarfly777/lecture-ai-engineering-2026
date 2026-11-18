@@ -1,0 +1,64 @@
+{
+ "node": {
+  "id": "lec03-main-s037",
+  "kind": "section",
+  "title": "Part 6 メモリ"
+ },
+ "children": [
+  {
+   "id": "lec03-main-p037",
+   "kind": "page",
+   "title": "Part 6 メモリ",
+   "document_id": "lec03-main",
+   "lecture": 3,
+   "document_title": "AIエージェント",
+   "section": "Part 6 メモリ",
+   "page": 37,
+   "content": "Part 6"
+  },
+  {
+   "id": "lec03-main-p038",
+   "kind": "page",
+   "title": "メモリがないと、毎回ゼロからやり直しになる",
+   "document_id": "lec03-main",
+   "lecture": 3,
+   "document_title": "AIエージェント",
+   "section": "Part 6 メモリ",
+   "page": 38,
+   "content": "メモリがないと、毎回ゼロからやり直しになる"
+  },
+  {
+   "id": "lec03-main-p039",
+   "kind": "page",
+   "title": "実装例：Claude",
+   "document_id": "lec03-main",
+   "lecture": 3,
+   "document_title": "AIエージェント",
+   "section": "Part 6 メモリ",
+   "page": 39,
+   "content": "実装例：Claude"
+  },
+  {
+   "id": "lec03-main-p040",
+   "kind": "page",
+   "title": "実装例：OpenClaw",
+   "document_id": "lec03-main",
+   "lecture": 3,
+   "document_title": "AIエージェント",
+   "section": "Part 6 メモリ",
+   "page": 40,
+   "content": "実装例：OpenClaw"
+  },
+  {
+   "id": "lec03-main-p041",
+   "kind": "page",
+   "title": "Skill：繰り返す作業の手順をファイルに保存しておく",
+   "document_id": "lec03-main",
+   "lecture": 3,
+   "document_title": "AIエージェント",
+   "section": "Part 6 メモリ",
+   "page": 41,
+   "content": "Skill：繰り返す作業の手順をファイルに保存しておく"
+  }
+ ]
+}

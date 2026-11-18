@@ -49,6 +49,25 @@ def load_pages(source: Path = RAG_SOURCE) -> list[dict]:
     return pages
 
 
+PREVIEW_CHARS = 100
+
+
+def page_preview(content: str, title: str, section: str, limit: int = PREVIEW_CHARS) -> str:
+    """候補ページの要約文を作る。見出し・章名・出典・著作権表示の行を除き、本文の先頭から最大limit文字を返す。"""
+    skip = {title.strip(), section.strip()}
+    lines = []
+    for line in content.strip().splitlines():
+        text = line.strip()
+        if (not text or text in skip or (section and section in text)
+                or section.startswith(text) or text.startswith(("出典", "©"))):
+            continue
+        lines.append(text)
+    joined = " ".join(lines)
+    if not joined:
+        return title
+    return joined[:limit] + ("…" if len(joined) > limit else "")
+
+
 def browse_tree(node_id: str | None = None) -> dict:
     """直下のページは先頭文、指定したページ自身は全文を返す。"""
     tree = json.loads(RAG_TREE.read_text(encoding="utf-8"))
@@ -61,7 +80,7 @@ def browse_tree(node_id: str | None = None) -> dict:
         if node["kind"] == "page":
             info.update({key: value for key, value in pages[node["id"]].items() if key != "page_id"})
             if not full:
-                info["content"] = re.split(r"(?<=[。！？])|\n", info["content"].strip(), maxsplit=1)[0]
+                info["content"] = page_preview(info["content"], node["title"], info.get("section", ""))
         return info
 
     remaining = [tree]
