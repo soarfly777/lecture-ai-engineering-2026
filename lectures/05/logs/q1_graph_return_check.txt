@@ -1,0 +1,11 @@
+(query: str) -> str
+seeds lec02-main-p052 52 LoRA と QLoRA ：大きなモデルも GPU 1 台で調整できる 
+seeds lec02-main-p051 51 PEFT ：モデル全体ではなく、一部だけを学習する 
+seeds lec02-main-p060 60 今日の演習： QLoRA で出力形式を矯正し、効果を測る 
+expanded lec02-main-p053 53 チャットボットの場合：何を FT し、何を FT しないか 
+expanded lec02-main-p050 50 判断の順番：測る → 分ける → プロンプト → Fine-Tuning 
+expanded lec02-main-p059 59 第 2 回のまとめ： 4 つの芯と、明日やること 
+expanded lec02-main-p061 61 演習の進め方と提出物（仮） 
+expanded lec02-main-p049 49 FT は「コストを下げる」ためにも使う 
+expanded lec02-main-p062 62 次回： AI エージェント。今日の性質が設計の前提になる 
+expanded lec02-main-p047 47 根拠と諸説：知識の追加は RAG が効きやすい 
